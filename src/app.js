@@ -1,7 +1,7 @@
 const Web3 = require("web3");
 const abiDecoder = require('abi-decoder');
 require('dotenv').config();
-const ethNetwork = process.env.INFURA_ENDPOINT
+const ethNetwork = process.env.INFURA_ENDPOINT;
 
 const web3 = new Web3(new Web3.providers.HttpProvider(ethNetwork));
 
