@@ -1,4 +1,5 @@
-const erc721_1155TransferEvent = [
+module.exports = {
+    erc721_1155TransferEvent : [
     {
       "anonymous": false,
       "inputs": [
@@ -86,7 +87,7 @@ const erc721_1155TransferEvent = [
       "type": "event"
   }
 ]
-
+}
 /*
 sample out
 

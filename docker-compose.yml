@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  mysqldb:
+    platform: linux/amd64
+    image: mysql:5.7
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h mysqldb -u root -p'test'"]
+      timeout: 20s
+      retries: 10
+    ports:
+      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
+    volumes:
+      - ./db:/var/lib/mysql
+  app:
+    depends_on:
+      mysqldb: 
+        condition: service_healthy
+    build: ./src
+    env_file: ./.env
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    environment:
+      - DB_HOST=mysqldb
+      - DB_USER=$MYSQLDB_USER
+      - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - DB_NAME=$MYSQLDB_DATABASE
+      - DB_PORT=$MYSQLDB_DOCKER_PORT
+      - INPUT_PARAM_startBlock = $INPUT_PARAM_startBlock
+      - INPUT_PARAM_endBlock = $INPUT_PARAM_startBlock
+      - INPUT_PARAM_contractAddress = $INPUT_PARAM_contractAddress
+    stdin_open: true
+    tty: true
+volumes: 
+  db:

@@ -1,17 +1,22 @@
 {
-  "name": "nftdata2",
+  "name": "docker-nft-data",
   "version": "1.0.0",
   "description": "Read all transactions from each block and store all Mint/Transfer event details of NFT contracts",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/app.js"
+    "start": "node ./server"
   },
   "author": "Saksham",
   "license": "ISC",
   "dependencies": {
     "abi-decoder": "^2.4.0",
     "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "knex": "^1.0.3",
+    "lodash": "^4.17.21",
+    "mysql": "^2.18.1",
+    "sequelize": "^6.17.0",
     "web3": "^1.7.1"
   }
 }
